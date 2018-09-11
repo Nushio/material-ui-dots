@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import Paper from 'material-ui/Paper'
+import Paper from '@material-ui/core/Paper'
+import withStyles from '@material-ui/core/styles/withStyles'
 
 const styles = {
   dots: {
@@ -16,7 +17,7 @@ const styles = {
   }
 }
 
-export default class Dots extends Component {
+class Dots extends Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -47,7 +48,7 @@ export default class Dots extends Component {
   }
 
   render () {
-    const {count, index, style = {}, onDotClick, dotColor, dotSize, ...other} = this.props
+    const {classes, count, index, style = {}, onDotClick, dotColor, dotSize, ...other} = this.props
     const {previousIndex} = this.state
     styles.dot = {
       ...styles.dot,
@@ -62,10 +63,11 @@ export default class Dots extends Component {
     }
     return (
       <div style={{...style, width: count * (dotSize * 2)}} {...other}>
-        <div style={styles.dots}>
+        <div className={classes.dots}>
           {[...Array(count).keys()].map((i) => (
             <div
               key={i}
+              className={classes.dotOuter}
               style={{
                 ...styles.dotOuter,
                 left: i * (dotSize * 2),
@@ -74,6 +76,7 @@ export default class Dots extends Component {
               onClick={(event) => this.handleDotClick(i, event)}
             >
               <Paper
+                className={classes.dot}
                 square={false}
                 elevation={0}
                 style={{
@@ -86,6 +89,7 @@ export default class Dots extends Component {
           ))}
           <Paper
             elevation={0}
+            className={classes.dot}
             style={{
               ...styles.dot,
               backgroundColor: dotColor,
@@ -114,3 +118,4 @@ Dots.defaultProps = {
   dotColor: '#fff',
   dotSize: 8
 }
+export default withStyles(styles)(Dots)

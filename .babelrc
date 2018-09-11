@@ -1,18 +1,11 @@
 {
   "presets": [
-    ["env", {
-      "targets": {
-        "browsers": [
-          "Chrome >= 52",
-          "FireFox >= 44",
-          "Safari >= 7",
-          "Explorer 11",
-          "last 4 Edge versions"
-        ]
-      }
-    }],
-    "es2015",
-    "stage-0",
+    "env",
     "react"
+  ],
+  "plugins": [
+    "transform-class-properties",
+    "transform-object-assign",
+    "transform-object-rest-spread"
   ]
 }
